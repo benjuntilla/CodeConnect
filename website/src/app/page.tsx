@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useMemo, useRef } from "react";
 import TinderCard from "react-tinder-card";
-import type API from "react-tinder-card";
 
 interface Project {
   name: string;
@@ -86,10 +85,11 @@ function Advanced() {
 
   return (
     <div>
+
       <div className="cardContainer flex justify-center">
         {db.map((character, index) => (
           <TinderCard
-            ref={childRefs[index]}
+            ref={childRefs[index] as React.RefObject<any>}
             className="swipe"
             key={character.name}
             onSwipe={(dir) => swiped(dir, character.name, index)}
