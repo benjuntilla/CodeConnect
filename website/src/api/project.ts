@@ -1,8 +1,11 @@
-import { ApolloClient, gql } from "@apollo/client";
+import { ApolloClient, ApolloQueryResult, gql } from "@apollo/client";
 import { Project } from "./types";
 import { UUID } from "crypto";
 
-export function createProject(client: ApolloClient<any>, project: Project) {
+export async function createProject(
+  client: ApolloClient<any>,
+  project: Project
+) {
   const mutation = gql`
     mutation CreateProject(
       $name: String!
@@ -30,7 +33,7 @@ export function createProject(client: ApolloClient<any>, project: Project) {
     }
   `;
 
-  return client.mutate({
+  let data = await client.mutate({
     mutation,
     variables: {
       name: project.name,
@@ -40,6 +43,26 @@ export function createProject(client: ApolloClient<any>, project: Project) {
       created_user: project.created_user,
     },
   });
+
+  const project_mutation = gql`
+    mutation CreateProjectAssignment($user_uuid: uuid!, $project_uuid: uuid!) {
+      insert_project_assignments_one(
+        object: { user_uuid: $user_uuid, project_uuid: $project_uuid }
+      ) {
+        user_uuid
+        project_uuid
+      }
+    }
+  `;
+  data.data.client.mutate({
+    mutation: project_mutation,
+    variables: {
+      user_uuid: project.created_user,
+      project_uuid: data.data.insert_projects_one.id,
+    },
+  });
+
+  return data;
 }
 
 export function getProject(client: ApolloClient<any>, id: UUID) {
@@ -128,7 +151,7 @@ export function recommendProjects(
   client: ApolloClient<any>,
   user_id: UUID,
   page_size: number,
-  page_number: number,
+  page_number: number
 ) {
   const query = gql`
     query RecommendProjects(
@@ -168,7 +191,7 @@ export function searchProjects(
   search: string,
   skills: string,
   page_size: number,
-  page_number: number,
+  page_number: number
 ) {
   const query = gql`
     query SearchProjects(
@@ -200,6 +223,42 @@ export function searchProjects(
     variables: {
       search,
       skills,
+      page_size,
+      page_number,
+    },
+  });
+}
+
+//get projects by user
+export function getProjectsByUser(
+  client: ApolloClient<any>,
+  user_id: UUID,
+  page_size: number,
+  page_number: number
+) {
+  const query = gql`
+    query GetProjectsByUser(
+      $user_id: uuid!
+      $page_size: Int!
+      $page_number: Int!
+    ) {
+      project_assignments(where: { user_uuid: { _eq: $user_id } }) {
+        project {
+          id
+          name
+          description
+          metadata
+          skills_required
+          created_user
+        }
+      }
+    }
+  `;
+
+  return client.query({
+    query,
+    variables: {
+      user_id,
       page_size,
       page_number,
     },

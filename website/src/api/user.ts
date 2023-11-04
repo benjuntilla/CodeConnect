@@ -1,4 +1,4 @@
-import { ApolloClient, gql } from "@apollo/client";
+import { ApolloClient, ApolloQueryResult, gql } from "@apollo/client";
 import { User } from "./types";
 import { UUID } from "crypto";
 

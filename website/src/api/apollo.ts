@@ -1,12 +1,12 @@
 import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
 
-export const createApolloClient = () => {
+export const createApolloClient = (user_id: string) => {
   return new ApolloClient({
     link: new HttpLink({
       uri: "https://hasura.io/learn/graphql",
       headers: {
-        "X-Hasura-Admin-Secret":
-          "f3yn9VCLzFQGEans5uex9J62HdZbArJrlzXlI5WBbmAT6IChIfAvmC3HuRu7R68x",
+        "X-Hasura-User-Id": user_id,
+        "X-Hasura-Role": "user",
       },
     }),
     cache: new InMemoryCache(),
