@@ -100,27 +100,25 @@ export default function Root() {
         Undo swipe!
       </button>
       {lastDirection ? (
-        <h2 key={lastDirection} className="infoText">
-          You swiped {lastDirection}
-        </h2>
+        <h2 key={lastDirection}>You swiped {lastDirection}</h2>
       ) : (
-        <h2 className="infoText">
+        <h2>
           Swipe a card or press a button to get Restore Card button visible!
         </h2>
       )}
-      <div className="grid grid-cols-3 gap-4 p-4">
+      <div className="grid grid-cols-6 w-screen h-screen">
         <button
-          className="btn btn-primary"
+          className="btn btn-primary col-span-1"
           disabled={!canSwipe}
           onClick={() => swipe("left")}
         >
           Swipe left!
         </button>
-        <div className="cardContainer">
+        <div className="cardContainer col-span-4 flex justify-center">
           {db.map((project, index) => (
             <TinderCard
               ref={childRefs[index] as React.RefObject<any>}
-              className="swipe"
+              className="absolute"
               key={project.name}
               onSwipe={(dir) => swiped(dir, project.name, index)}
               onCardLeftScreen={() => outOfFrame(project.name, index)}
@@ -150,7 +148,7 @@ export default function Root() {
           ))}
         </div>
         <button
-          className="btn btn-primary"
+          className="btn btn-primary col-span-1"
           disabled={!canSwipe}
           onClick={() => swipe("right")}
         >

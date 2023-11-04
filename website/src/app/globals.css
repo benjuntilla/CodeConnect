@@ -2,80 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-#root {
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  width: 100vw;
-  min-height: 100vh;
-  overflow: hidden;
-  /* background: linear-gradient(#fff, #999); */
-  background: linear-gradient(#e66465, #9198e5);
-}
-
 * {
   user-select: none;
-}
-
-#root > div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.app {
-  overflow: hidden;
-}
-
-.app > div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.row {
-  flex-direction: row !important;
-}
-
-.row > * {
-  margin: 5px;
-}
-
-.swipe {
-  position: absolute;
-}
-
-.cardContainer {
-  width: 90vw;
-  max-width: 260px;
-  height: 300px;
-}
-
-.swipe:last-of-type {
-}
-
-.card h3 {
-  position: absolute;
-  bottom: 0;
-  margin: 10px;
-  color: #fff;
-}
-
-.infoText {
-  width: 100%;
-  justify-content: center;
-  display: flex;
-  color: #fff;
-  animation-name: popup;
-  animation-duration: 800ms;
-}
-
-@media (max-width: 625px) {
-  .buttons {
-    flex-direction: column;
-  }
 }
 
 @keyframes popup {
