@@ -1,36 +1,43 @@
 "use client";
 import React, { useState, useMemo, useRef } from "react";
 import TinderCard from "react-tinder-card";
+import Image from "next/image";
 
 interface Project {
   name: string;
   url: string;
+  description: string;
 }
 
 const db: Project[] = [
   {
     name: "Richard Hendricks",
-    url: "./CodeCupid-.png",
+    url: "/CodeCupid-.png",
+    description: "blah blah",
   },
   {
     name: "Erlich Bachman",
-    url: "./CodeCupid-.png",
+    url: "/CodeCupid-.png",
+    description: "blah blah",
   },
   {
     name: "Monica Hall",
-    url: "./CodeCupid-.png",
+    url: "/CodeCupid-.png",
+    description: "blah blah",
   },
   {
     name: "Jared Dunn",
-    url: "./CodeCupid-.png",
+    url: "/CodeCupid-.png",
+    description: "blah blah",
   },
   {
     name: "Dinesh Chugtai",
-    url: "./CodeCupid-.png",
+    url: "/CodeCupid-.png",
+    description: "blah blah",
   },
 ];
 
-function Advanced() {
+export default function Root() {
   const [currentIndex, setCurrentIndex] = useState(db.length - 1);
   const [lastDirection, setLastDirection] = useState("");
   // used for outOfFrame closure
@@ -85,48 +92,13 @@ function Advanced() {
 
   return (
     <div>
-
-      <div className="cardContainer flex justify-center">
-        {db.map((character, index) => (
-          <TinderCard
-            ref={childRefs[index] as React.RefObject<any>}
-            className="swipe"
-            key={character.name}
-            onSwipe={(dir) => swiped(dir, character.name, index)}
-            onCardLeftScreen={() => outOfFrame(character.name, index)}
-          >
-            <div
-              style={{ backgroundImage: "url(" + character.url + ")" }}
-              className="card"
-            >
-              <h3>{character.name}</h3>
-            </div>
-          </TinderCard>
-        ))}
-      </div>
-      <div className="buttons">
-        <button
-          className="btn btn-primary"
-          disabled={!canSwipe}
-          onClick={() => swipe("left")}
-        >
-          Swipe left!
-        </button>
-        <button
-          className="btn btn-primary"
-          disabled={!canGoBack}
-          onClick={() => goBack()}
-        >
-          Undo swipe!
-        </button>
-        <button
-          className="btn btn-primary"
-          disabled={!canSwipe}
-          onClick={() => swipe("right")}
-        >
-          Swipe right!
-        </button>
-      </div>
+      <button
+        className="btn btn-primary"
+        disabled={!canGoBack}
+        onClick={() => goBack()}
+      >
+        Undo swipe!
+      </button>
       {lastDirection ? (
         <h2 key={lastDirection} className="infoText">
           You swiped {lastDirection}
@@ -136,8 +108,55 @@ function Advanced() {
           Swipe a card or press a button to get Restore Card button visible!
         </h2>
       )}
+      <div className="grid grid-cols-3 gap-4 p-4">
+        <button
+          className="btn btn-primary"
+          disabled={!canSwipe}
+          onClick={() => swipe("left")}
+        >
+          Swipe left!
+        </button>
+        <div className="cardContainer">
+          {db.map((project, index) => (
+            <TinderCard
+              ref={childRefs[index] as React.RefObject<any>}
+              className="swipe"
+              key={project.name}
+              onSwipe={(dir) => swiped(dir, project.name, index)}
+              onCardLeftScreen={() => outOfFrame(project.name, index)}
+            >
+              <div className="w-96 h-48 bg-base-100 shadow-xl">
+                <figure>
+                  <Image
+                    src={project.url}
+                    width={100}
+                    height={100}
+                    alt="Project image"
+                  />
+                </figure>
+                <div className="card-body">
+                  <h2 className="card-title">
+                    {project.name}
+                    <div className="badge badge-secondary">NEW</div>
+                  </h2>
+                  <p>{project.description}</p>
+                  <div className="card-actions justify-end">
+                    <div className="badge badge-outline">Fashion</div>
+                    <div className="badge badge-outline">Products</div>
+                  </div>
+                </div>
+              </div>
+            </TinderCard>
+          ))}
+        </div>
+        <button
+          className="btn btn-primary"
+          disabled={!canSwipe}
+          onClick={() => swipe("right")}
+        >
+          Swipe right!
+        </button>
+      </div>
     </div>
   );
 }
-
-export default Advanced;
