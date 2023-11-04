@@ -1,33 +1,39 @@
 "use client";
 import React, { useState, useMemo, useRef } from "react";
 import TinderCard from "react-tinder-card";
+import type API from "react-tinder-card";
 
-const db = [
+interface Project {
+  name: string;
+  url: string;
+}
+
+const db: Project[] = [
   {
     name: "Richard Hendricks",
-    url: "./img/richard.jpg",
+    url: "./CodeCupid-.png",
   },
   {
     name: "Erlich Bachman",
-    url: "./img/erlich.jpg",
+    url: "./CodeCupid-.png",
   },
   {
     name: "Monica Hall",
-    url: "./img/monica.jpg",
+    url: "./CodeCupid-.png",
   },
   {
     name: "Jared Dunn",
-    url: "./img/jared.jpg",
+    url: "./CodeCupid-.png",
   },
   {
     name: "Dinesh Chugtai",
-    url: "./vercel.svg",
+    url: "./CodeCupid-.png",
   },
 ];
 
 function Advanced() {
   const [currentIndex, setCurrentIndex] = useState(db.length - 1);
-  const [lastDirection, setLastDirection] = useState();
+  const [lastDirection, setLastDirection] = useState("");
   // used for outOfFrame closure
   const currentIndexRef = useRef(currentIndex);
 
@@ -49,7 +55,7 @@ function Advanced() {
   const canSwipe = currentIndex >= 0;
 
   // set last direction and decrease current index
-  const swiped = (direction, nameToDelete, index) => {
+  const swiped = (direction: string, nameToDelete: string, index: number) => {
     setLastDirection(direction);
     updateCurrentIndex(index - 1);
   };
@@ -57,15 +63,16 @@ function Advanced() {
   const outOfFrame = (name: string, idx: number) => {
     console.log(`${name} (${idx}) left the screen!`, currentIndexRef.current);
     // handle the case in which go back is pressed before card goes outOfFrame
-    currentIndexRef.current >= idx && childRefs[idx].current.restoreCard();
+    currentIndexRef.current >= idx &&
+      (childRefs[idx].current as any).restoreCard();
     // TODO: when quickly swipe and restore multiple times the same card,
     // it happens multiple outOfFrame events are queued and the card disappear
     // during latest swipes. Only the last outOfFrame event should be considered valid
   };
 
-  const swipe = async (dir) => {
+  const swipe = async (dir: string) => {
     if (canSwipe && currentIndex < db.length) {
-      await childRefs[currentIndex].current.swipe(dir); // Swipe the card!
+      await (childRefs[currentIndex].current as any).swipe(dir); // Add type assertion here
     }
   };
 
@@ -74,7 +81,7 @@ function Advanced() {
     if (!canGoBack) return;
     const newIndex = currentIndex + 1;
     updateCurrentIndex(newIndex);
-    await childRefs[newIndex].current.restoreCard();
+    await (childRefs[newIndex].current as any).restoreCard(); // Add type assertion here
   };
 
   return (
