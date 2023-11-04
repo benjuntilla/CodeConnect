@@ -21,7 +21,7 @@ const db = [
   },
   {
     name: "Dinesh Chugtai",
-    url: "./img/dinesh.jpg",
+    url: "./vercel.svg",
   },
 ];
 
@@ -80,7 +80,7 @@ function Advanced() {
   return (
     <div>
       <h1>React Tinder Card</h1>
-      <div className="cardContainer">
+      <div className="cardContainer flex justify-center">
         {db.map((character, index) => (
           <TinderCard
             ref={childRefs[index]}
