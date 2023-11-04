@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={inter.className}>
-        <div className="navbar bg-base-100">
+        <div className="navbar bg-bg">
           <div className="flex-none">
             <button className="btn btn-square btn-ghost">
               <svg
