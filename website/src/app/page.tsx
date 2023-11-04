@@ -39,7 +39,7 @@ function Advanced() {
     [],
   );
 
-  const updateCurrentIndex = (val) => {
+  const updateCurrentIndex = (val: number) => {
     setCurrentIndex(val);
     currentIndexRef.current = val;
   };
@@ -79,7 +79,6 @@ function Advanced() {
 
   return (
     <div>
-      <h1>React Tinder Card</h1>
       <div className="cardContainer flex justify-center">
         {db.map((character, index) => (
           <TinderCard
@@ -100,19 +99,22 @@ function Advanced() {
       </div>
       <div className="buttons">
         <button
-          style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
+          className="btn btn-primary"
+          disabled={!canSwipe}
           onClick={() => swipe("left")}
         >
           Swipe left!
         </button>
         <button
-          style={{ backgroundColor: !canGoBack && "#c3c4d3" }}
+          className="btn btn-primary"
+          disabled={!canGoBack}
           onClick={() => goBack()}
         >
           Undo swipe!
         </button>
         <button
-          style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
+          className="btn btn-primary"
+          disabled={!canSwipe}
           onClick={() => swipe("right")}
         >
           Swipe right!
