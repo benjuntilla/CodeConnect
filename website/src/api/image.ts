@@ -33,8 +33,8 @@ export async function uploadProjectImg(project_uuid: string, file: any) {
   const s3Client = new S3Client({
     region: "us-east-1",
     credentials: {
-      accessKeyId: "AKIA3LALEAOS4LXKA7XR",
-      secretAccessKey: "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",
+      accessKeyId: import.meta.env.VITE_AWS_ACCESS_KEY,
+      secretAccessKey: import.meta.env.VITE_AWS_SECRET_KEY,
     },
   });
   let key_name = "project_imgs/" + project_uuid;

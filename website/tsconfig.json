@@ -7,7 +7,7 @@
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "CommonJS",
+    "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -27,7 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/api/tests.ts"
+    "src/api/tests.mts"
   ],
   "exclude": ["node_modules"]
 }

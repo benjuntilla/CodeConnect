@@ -3,10 +3,10 @@ import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
 export const createApolloClient = () => {
   return new ApolloClient({
     link: new HttpLink({
-      uri: "https://quality-oyster-64.hasura.app/v1/graphql",
+      uri: import.meta.env.VITE_HASURA_ENDPOINT as string,
       headers: {
-        "x-hasura-admin-secret":
-          "JKLRAD7Ro8vaY1Yd7TXOAvpq55FRQon5f8FQRkBuhWSE1KVADSbqjgihNfq6SZcd",
+        "x-hasura-admin-secret": import.meta.env
+          .VITE_HASURA_ADMIN_SECRET as string,
       },
     }),
     cache: new InMemoryCache(),
