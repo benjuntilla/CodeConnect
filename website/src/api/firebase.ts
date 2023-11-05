@@ -4,7 +4,7 @@ import "dotenv/config";
 
 export function initializeFirebase() {
   const app = initializeApp({
-    apiKey: process.env.VITE_FIREBASE_API_KEY,
+    apiKey: "AIzaSyAK9iwn3uVMUIgR8jFwCKar3jaWv6TMQD4",
     authDomain: "codecupid-8ff03.firebaseapp.com",
     projectId: "codecupid-8ff03",
     storageBucket: "codecupid-8ff03.appspot.com",
