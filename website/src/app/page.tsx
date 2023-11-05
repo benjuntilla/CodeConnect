@@ -23,7 +23,8 @@ export default function Match() {
     getAuth(context.app).onAuthStateChanged((user) => {
       if (user) {
         recommendProjects(context.client, user?.uid, 10, 1).then((data) => {
-          setRecs(data.data);
+          console.log(data);
+          setRecs(data.data.recommend_projects);
           setCurrentIndex(recs.length);
         });
       }
