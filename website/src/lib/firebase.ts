@@ -16,7 +16,7 @@ export function initializeFirebase() {
 
 export function loginGoogleFirebase(app: FirebaseApp) {
   const provider = new GoogleAuthProvider();
-  const auth = getAuth();
+  const auth = getAuth(app);
   const user = signInWithPopup(auth, provider)
     .then((result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.
@@ -41,8 +41,8 @@ export function loginGoogleFirebase(app: FirebaseApp) {
   return user;
 }
 
-export function logoutFirebase() {
-  const auth = getAuth();
+export function logoutFirebase(app: FirebaseApp) {
+  const auth = getAuth(app);
   auth
     .signOut()
     .then(() => {
@@ -53,8 +53,8 @@ export function logoutFirebase() {
     });
 }
 
-export function getFirebaseUser() {
-  const auth = getAuth();
+export function getFirebaseUser(app: FirebaseApp) {
+  const auth = getAuth(app);
   const user = auth.currentUser;
 
   if (user) {
@@ -64,8 +64,8 @@ export function getFirebaseUser() {
   }
 }
 
-export function getUserUID() {
-  const auth = getAuth();
+export function getUserUID(app: FirebaseApp) {
+  const auth = getAuth(app);
   const user = auth.currentUser;
 
   if (user) {

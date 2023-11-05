@@ -9,6 +9,7 @@ import { recommendProjects } from "@/lib/api/project";
 import { createApolloClient } from "@/lib/apollo";
 import { Project } from "@/lib/types";
 import { useUserContext } from "./components/UserProvider";
+import { getAuth } from "firebase/auth";
 
 export default function Match() {
   const [lastDirection, setLastDirection] = useState("");
@@ -19,13 +20,14 @@ export default function Match() {
   const context = useUserContext();
 
   useEffect(() => {
-    let user_id = getUserUID();
-    if (user_id != null) {
-      recommendProjects(context.client, user_id, 10, 1).then((data) => {
-        setRecs(data.data);
-        setCurrentIndex(recs.length);
-      });
-    }
+    getAuth(context.app).onAuthStateChanged((user) => {
+      if (user) {
+        recommendProjects(context.client, user?.uid, 10, 1).then((data) => {
+          setRecs(data.data);
+          setCurrentIndex(recs.length);
+        });
+      }
+    });
   }, []);
 
   const childRefs = useMemo(
