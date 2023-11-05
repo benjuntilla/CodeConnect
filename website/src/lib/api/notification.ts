@@ -25,8 +25,8 @@ export function createNotifcation(
   return client.mutate({
     mutation,
     variables: {
-      user_id: notification.user_uuid,
-      project_id: notification.project_uuid,
+      user_uuid: notification.user_uuid,
+      project_uuid: notification.project_uuid,
     },
   });
 }
