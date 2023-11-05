@@ -5,7 +5,7 @@ import { func } from "prop-types";
 
 export function createNotifcation(
   client: ApolloClient<any>,
-  notification: Notification,
+  notification: Notification
 ) {
   const mutation = gql`
     mutation CreateNotification($user_uuid: String!, $project_uuid: uuid!) {
@@ -28,13 +28,15 @@ export function createNotifcation(
   });
 }
 
-export function getNotifications(client: ApolloClient<any>) {
+export function getNotifications(client: ApolloClient<any>, user_id: string) {
   const query = gql`
     query GetNotification {
-      notifications {
-        id
-        project_uuid
-        user_uuid
+      user_by_pk(id: $user_id) {
+        notifications {
+          id
+          project_uuid
+          user_uuid
+        }
       }
     }
   `;
@@ -65,7 +67,7 @@ export function acceptRequest(
   client: ApolloClient<any>,
   user_id: UUID,
   project_id: UUID,
-  notification_id: UUID,
+  notification_id: UUID
 ) {
   const mutation = gql`
     mutation AcceptRequest(
@@ -96,7 +98,7 @@ export function acceptRequest(
 
 export function rejectRequest(
   client: ApolloClient<any>,
-  notification_id: UUID,
+  notification_id: UUID
 ) {
   const mutation = gql`
     mutation RejectRequest($notification_id: uuid!) {
