@@ -1,12 +1,24 @@
 import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
 
-export const createApolloClient = (user_id: string) => {
+export const createAdminApolloClient = () => {
   return new ApolloClient({
     link: new HttpLink({
-      uri: "https://quality-oyster-64.hasura.app/v1/graphql",
+      uri: process.env.VITE_HASURA_DB_URL,
       headers: {
-        "x-hasura-admin-secret":
-          "JKLRAD7Ro8vaY1Yd7TXOAvpq55FRQon5f8FQRkBuhWSE1KVADSbqjgihNfq6SZcd",
+        "x-hasura-admin-secret": process.env.VITE_HASURA_CLIENT_SECRET!,
+      },
+    }),
+    cache: new InMemoryCache(),
+  });
+};
+
+export const createUserApolloClient = (user_id: string) => {
+  return new ApolloClient({
+    link: new HttpLink({
+      uri: process.env.VITE_HASURA_DB_URL,
+      headers: {
+        "x-hasura-user-role": "user",
+        "x-hasura-user-id": user_id,
       },
     }),
     cache: new InMemoryCache(),
