@@ -37,7 +37,8 @@ export default function SearchBar() {
           setSearchTerm(e.target.value);
         }}
       />
-      <button onClick={handleSearchClick}></button>
+          <button onClick={handleSearchClick}></button>
+          {/* window.location.href() */}
     </div>
   );
 }
