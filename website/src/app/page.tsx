@@ -25,7 +25,7 @@ export default function Match() {
         recommendProjects(context.client, user?.uid, 10, 1).then((data) => {
           console.log(data);
           setRecs(data.data.recommend_projects);
-          setCurrentIndex(recs.length);
+          updateCurrentIndex(data.data.recommend_projects.length - 1);
         });
       }
     });
