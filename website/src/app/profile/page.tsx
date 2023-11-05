@@ -1,6 +1,7 @@
-import Image from "next/image";
-import { CgProfile } from "react-icons/cg";
 import { AiFillGithub } from "react-icons/ai";
+import CreateProj from "../components/CreateProj";
+import Image from "next/image";
+
 export default function Profile() {
   return (
     <>
@@ -22,9 +23,9 @@ export default function Profile() {
           <div className="avatar">
             <div className="rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 w-30 h-30">
               <Image
-                src="/next.svg"
-                width="100"
-                height="100"
+                src="/Guy.png"
+                width="150"
+                height="150"
                 alt="Avatar Tailwind CSS Component"
               />
             </div>
@@ -36,11 +37,17 @@ export default function Profile() {
               flexDirection: "column",
               justifyContent: "center",
               marginLeft: "1rem",
-              color: "black",
+              color: "white",
             }}
           >
-            Profile
-            <p style={{ display: "flex", alignItems: "center", fontSize: "14px" }}>
+            John Doe
+            <p
+              style={{
+                display: "flex",
+                alignItems: "center",
+                fontSize: "14px",
+              }}
+            >
               <AiFillGithub className="mx-3" size="2em" />
               <a href="#">Your Link</a>
             </p>
@@ -50,7 +57,9 @@ export default function Profile() {
         <div className="flex flex-col lg:flex-row flex-grow">
           <div className="flex-grow card bg-base-300 rounded-box p-4 m-2">
             <div className="mb-2">My projects:</div>
-            <div className="form-control">
+            <CreateProj />
+          </div>
+          {/* <div className="form-control">
               <label className="swap swap-flip text-9xl">
                 <input type="checkbox" />
                 <div className="swap-on">
@@ -66,10 +75,11 @@ export default function Profile() {
               </label>
             </div>
           </div>
-          <div className="divider lg:divider-horizontal"></div>
+          <div className="divider lg:divider-horizontal"></div> */}
+
           <div className="flex-grow card bg-base-300 rounded-box p-4 m-2">
-            <div className="mb-2">
-              Projects I have collaborated on:
+            <div className="mb-2 ">
+              Projects I am Working on:
               <div className="overflow-x-auto">
                 <table className="table">
                   {/* head */}
@@ -77,8 +87,6 @@ export default function Profile() {
                     <tr>
                       <th>Done?</th>
                       <th>Name</th>
-                      <th>Job</th>
-                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -96,24 +104,26 @@ export default function Profile() {
                               <Image
                                 width="300"
                                 height="300"
-                                src="/Guy.png"
+                                src="/vercel.svg"
                                 alt="Avatar Tailwind CSS Component"
                               />
                             </div>
                           </div>
                           <div>
-                            <div className="font-bold">Hart Hagerty</div>
+                            <div className="font-bold">Video Game Project</div>
                             <div className="text-sm opacity-50">
-                              United States
+                              Author: Rajiv Menon
                             </div>
                           </div>
                         </div>
                       </td>
                       <td>
-                        Zemlak, Daniel and Leannon
+                        <a className="link link-success">
+                          https://github.com/CodeMasterX99/ultimate-project
+                        </a>
                         <br />
                         <span className="badge badge-ghost badge-sm">
-                          Desktop Support Technician
+                          Needs Help With Code
                         </span>
                       </td>
                       <th>
@@ -134,7 +144,7 @@ export default function Profile() {
                           <div className="avatar">
                             <div className="mask mask-squircle w-12 h-12">
                               <Image
-                                src="/tailwind-css-component-profile-3@56w.png"
+                                src="/vercel.svg"
                                 width="100"
                                 height="100"
                                 alt="Avatar Tailwind CSS Component"
@@ -142,16 +152,20 @@ export default function Profile() {
                             </div>
                           </div>
                           <div>
-                            <div className="font-bold">Brice Swyre</div>
-                            <div className="text-sm opacity-50">China</div>
+                            <div className="font-bold">Website Design</div>
+                            <div className="text-sm opacity-50">
+                              Author: Brice Swyre
+                            </div>
                           </div>
                         </div>
                       </td>
                       <td>
-                        Carroll Group
+                        <a className="link link-info">
+                          https://github.com/WebDevJourney/peak-performance-site
+                        </a>
                         <br />
                         <span className="badge badge-ghost badge-sm">
-                          Tax Accountant
+                          Help with Errors
                         </span>
                       </td>
                       <th>
@@ -172,7 +186,7 @@ export default function Profile() {
                           <div className="avatar">
                             <div className="mask mask-squircle w-12 h-12">
                               <Image
-                                src="/tailwind-css-component-profile-4@56w.png"
+                                src="/vercel.svg"
                                 width="100"
                                 height="100"
                                 alt="Avatar Tailwind CSS Component"
@@ -180,16 +194,22 @@ export default function Profile() {
                             </div>
                           </div>
                           <div>
-                            <div className="font-bold">Marjy Ferencz</div>
-                            <div className="text-sm opacity-50">Russia</div>
+                            <div className="font-bold">
+                              Arduino Watch Project
+                            </div>
+                            <div className="text-sm opacity-50">
+                              Author: Marjy Ferencz
+                            </div>
                           </div>
                         </div>
                       </td>
                       <td>
-                        Rowe-Schoen
+                        <a className="link link-error">
+                          https://github.com/TinkerTech/arduino-smartwatch
+                        </a>
                         <br />
                         <span className="badge badge-ghost badge-sm">
-                          Office Assistant I
+                          Assist with code
                         </span>
                       </td>
                       <th>
@@ -210,7 +230,7 @@ export default function Profile() {
                           <div className="avatar">
                             <div className="mask mask-squircle w-12 h-12">
                               <Image
-                                src="/tailwind-css-component-profile-5@56w.png"
+                                src="/vercel.svg"
                                 width="100"
                                 height="100"
                                 alt="Avatar Tailwind CSS Component"
@@ -218,16 +238,20 @@ export default function Profile() {
                             </div>
                           </div>
                           <div>
-                            <div className="font-bold">Yancy Tear</div>
-                            <div className="text-sm opacity-50">Brazil</div>
+                            <div className="font-bold">Personal Website</div>
+                            <div className="text-sm opacity-50">
+                              Author: Yancy Tear
+                            </div>
                           </div>
                         </div>
                       </td>
                       <td>
-                        Wyman-Ledner
+                        <a className="link link-warning">
+                          https://github.com/CreativeSoul/personal-website-portfolio
+                        </a>
                         <br />
                         <span className="badge badge-ghost badge-sm">
-                          Community Outreach Specialist
+                          Code Help
                         </span>
                       </td>
                       <th>
@@ -250,10 +274,6 @@ export default function Profile() {
           </div>
         </div>
       </div>
-
-
-
-
     </>
   );
 }

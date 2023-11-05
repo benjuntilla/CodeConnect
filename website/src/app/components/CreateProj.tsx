@@ -15,7 +15,8 @@ export default function CreateProj() {
     metadata: {}, // Initialize metadata as an empty object or with specific properties if needed
     project_img: "", // You might want to handle image uploads separately
   });
-
+  const [projectCreated, setProjectCreated] = useState(false);
+  const [resultText, setResultText] = useState("");
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProjectData((prevState) => ({
@@ -27,6 +28,7 @@ export default function CreateProj() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!user) {
+      setResultText("You must be logged in to create a project.");
       console.error("You must be logged in to create a project.");
       return;
     }
@@ -35,9 +37,9 @@ export default function CreateProj() {
         ...projectData,
         created_user: getUserUID(context.app), // Assuming 'user' object has an 'id' field
       };
-      const result = await createProject(context.client, context.project);
-      console.log("Project created:", result);
-      // Handle what to do after the project is created successfully (e.g., redirecting to the project page)
+      const result = await createProject(context.client, newProject);
+      setProjectCreated(true);
+      setResultText(`Project "${result.data.insert_projects_one.name}" created successfully!`);
     } catch (error) {
       console.error("Error creating project:", error);
     }
@@ -45,6 +47,7 @@ export default function CreateProj() {
 
   return (
     <>
+
       {/* Open the modal using document.getElementById('ID').showModal() method */}
 <button className="btn" onClick={()=>document.getElementById('my_modal_3').showModal()}>Create Project</button>
 <dialog id="my_modal_3" className="modal">
@@ -52,7 +55,7 @@ export default function CreateProj() {
           <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
     <h3 className="font-bold text-lg">Create your Project!</h3>
     <p className="py-4">Press ESC key or click the button above to close</p>
-    <div className="modal-action">
+          <div className="modal-action">
       <form method="dialog">
         {/* if there is a button in form, it will close the modal */}
 
@@ -113,12 +116,22 @@ export default function CreateProj() {
                 type="submit" style={{ border: '1px solid #ccc', padding: '10px 20px', cursor: 'pointer' }}>
                   Create Project
                 </button>
-              </div>
+                </div>
       </form>
     </div>
-  </div>
-</dialog>
 
+  </div>
+      </dialog>
+
+      {/* <div tabIndex={0} className="collapse bg-base-200 mt-10">
+  <div className="collapse-title text-xl font-medium ">
+    <p>{projectData.name}</p>
+  </div>
+  <div className="collapse-content">
+ <p> {projectData.description}</p>
+  <p>{projectData.skills_required}</p>
+  </div>
+      </div> */}
 
 
    </>
