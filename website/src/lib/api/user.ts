@@ -32,21 +32,17 @@ export function createUser(client: ApolloClient<any>, user: User) {
       }
     }
   `;
-  try {
-    return client.mutate({
-      mutation,
-      variables: {
-        id: user.id,
-        name: user.name,
-        description: user.description,
-        university: user.description,
-        skills: user.skills,
-        metadata: user.metadata,
-      },
-    });
-  } catch (e) {
-    console.log(e);
-  }
+  return client.mutate({
+    mutation,
+    variables: {
+      id: user.id,
+      name: user.name,
+      description: user.description,
+      university: user.description,
+      skills: user.skills,
+      metadata: user.metadata,
+    },
+  });
 }
 
 export function getUser(client: ApolloClient<any>, id: string) {
