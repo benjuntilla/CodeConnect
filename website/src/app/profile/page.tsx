@@ -56,30 +56,12 @@ export default function Profile() {
 
         <div className="flex flex-col lg:flex-row flex-grow">
           <div className="flex-grow card bg-base-300 rounded-box p-4 m-2">
-            <div className="mb-2">My projects:</div>
+            <div className="mb-2">My Projects</div>
             <CreateProj />
           </div>
-          {/* <div className="form-control">
-              <label className="swap swap-flip text-9xl">
-                <input type="checkbox" />
-                <div className="swap-on">
-                  <label className="label">
-                    <span className="label-text">Return</span>
-                  </label>
-                  <input
-                    type="file"
-                    className="file-input file-input-bordered"
-                  />
-                </div>
-                <div className="swap-off">+</div>
-              </label>
-            </div>
-          </div>
-          <div className="divider lg:divider-horizontal"></div> */}
-
           <div className="flex-grow card bg-base-300 rounded-box p-4 m-2">
             <div className="mb-2 ">
-              Projects I am Working on:
+              Projects I am Working on
               <div className="overflow-x-auto">
                 <table className="table">
                   {/* head */}

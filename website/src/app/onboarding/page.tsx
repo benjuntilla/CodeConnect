@@ -46,6 +46,7 @@ export default function Onboarding() {
       <div className="form-control w-full max-w-xs">
         <label className="label">
           <span className="label-text">Skills</span>
+          <span className="label-text-alt">Separate with commas!</span>
         </label>
         <input
           type="text"
@@ -59,7 +60,7 @@ export default function Onboarding() {
       </div>
       <div className="form-control w-full max-w-xs">
         <label className="label">
-          <span className="label-text">Github URL</span>
+          <span className="label-text">Github URL (optional)</span>
         </label>
         <input
           type="text"
@@ -73,7 +74,7 @@ export default function Onboarding() {
       </div>
       <div className="form-control w-full max-w-xs">
         <label className="label">
-          <span className="label-text">University</span>
+          <span className="label-text">University (optional)</span>
         </label>
         <input
           type="text"
@@ -89,7 +90,7 @@ export default function Onboarding() {
         <div className="profile_pfp"></div>
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text">Profile picture upload</span>
+            <span className="label-text">Profile picture upload (optional)</span>
           </label>
           <input
             type="file"
