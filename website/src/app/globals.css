@@ -6,6 +6,10 @@
   user-select: none;
 }
 
+:root {
+  overflow: hidden;
+}
+
 @keyframes popup {
   0% {
     transform: scale(1, 1);

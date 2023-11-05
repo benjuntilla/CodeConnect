@@ -2,6 +2,8 @@
 import React, { useState, useMemo, useRef } from "react";
 import TinderCard from "react-tinder-card";
 import Image from "next/image";
+import { ImCross } from "react-icons/im";
+import { AiFillHeart } from "react-icons/ai";
 
 interface Project {
   name: string;
@@ -91,7 +93,7 @@ export default function Root() {
   };
 
   return (
-    <div>
+    <div className="h-full w-full">
       <button
         className="btn btn-primary"
         disabled={!canGoBack}
@@ -106,14 +108,16 @@ export default function Root() {
           Swipe a card or press a button to get Restore Card button visible!
         </h2>
       )}
-      <div className="grid grid-cols-6 w-screen h-screen">
-        <button
-          className="btn btn-primary col-span-1"
-          disabled={!canSwipe}
-          onClick={() => swipe("left")}
-        >
-          Swipe left!
-        </button>
+      <div className="grid grid-cols-6">
+        <div className="col-span-1 flex justify-center items-center">
+          <button
+            className="btn btn-primary"
+            disabled={!canSwipe}
+            onClick={() => swipe("left")}
+          >
+            <ImCross />
+          </button>
+        </div>
         <div className="cardContainer col-span-4 flex justify-center">
           {db.map((project, index) => (
             <TinderCard
@@ -147,13 +151,15 @@ export default function Root() {
             </TinderCard>
           ))}
         </div>
-        <button
-          className="btn btn-primary col-span-1"
-          disabled={!canSwipe}
-          onClick={() => swipe("right")}
-        >
-          Swipe right!
-        </button>
+        <div className="col-span-1 justify-center items-center">
+          <button
+            className="btn btn-primary"
+            disabled={!canSwipe}
+            onClick={() => swipe("right")}
+          >
+            <AiFillHeart />
+          </button>
+        </div>
       </div>
     </div>
   );
