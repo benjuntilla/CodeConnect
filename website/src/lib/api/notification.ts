@@ -8,7 +8,10 @@ export function createNotifcation(
   notification: Notification
 ) {
   const mutation = gql`
-    mutation CreateNotification($user_uuid: String!, $project_uuid: uuid!) {
+    mutation CreateNotification(
+      $user_uuid: String = ""
+      $project_uuid: uuid = ""
+    ) {
       insert_notifications_one(
         object: { user_uuid: $user_uuid, project_uuid: $project_uuid }
       ) {
