@@ -11,7 +11,7 @@ import {
   rejectRequest,
 } from "@/lib/api/notification";
 
-const NotificationDrawer = () => {
+export const NotificationDrawer = () => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const context = useUserContext();
@@ -60,11 +60,26 @@ const NotificationDrawer = () => {
   }, []);
   return (
     <div className="relative">
-      <button
-        className="p-2 bg-blue-500 text-white rounded-full shadow-md fixed bottom-4 right-4"
-        onClick={toggleDrawer}
-      >
-        Notifications ({notifications.length})
+      <button className="btn btn-ghost btn-circle" onClick={toggleDrawer}>
+        <div className="indicator">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+            />
+          </svg>
+          {notifications.length > 0 && (
+            <span className="badge badge-xs badge-primary indicator-item"></span>
+          )}
+        </div>
       </button>
       {isOpen && (
         <div className="fixed bottom-16 right-4 w-64 bg-white border rounded-lg shadow-md p-4">
