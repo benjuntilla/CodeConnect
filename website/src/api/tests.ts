@@ -60,7 +60,7 @@ const projects: Project[] = [
     metadata: { author: "Jane Smith", pages: 30 },
   },
 ];
-const admin = createApolloClient("admin");
+const admin = createApolloClient();
 
 async function initializeWithDummyData() {
   for (const user of users) {
