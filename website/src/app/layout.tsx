@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
-import { FaBeer } from "react-icons/fa";
+import LoginButton from "./components/LoginButton";
+import { CgProfile } from "react-icons/cg";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,10 +30,15 @@ export default function RootLayout({
                 alt="Code Cupid icon"
               />
             </a>
-            <h1 className="text-lg">Code Cupid</h1>
+            <a href="/">
+              <h1 className="text-lg">Code Cupid</h1>
+            </a>
           </div>
           <div className="flex-none">
-            <button className="btn btn-primary">Log in</button>
+            <LoginButton />
+            <a href="/profile">
+              <CgProfile className="mx-3" size="2em" />
+            </a>
           </div>
         </div>
         <div className="flex justify-center">{children}</div>
