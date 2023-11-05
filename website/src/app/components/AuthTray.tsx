@@ -34,7 +34,10 @@ export default function AuthTray() {
           context.client,
           getUserUID(context.app) ?? "undefined",
         ).then((res) => {
-          setNotifications(res.data.users_by_pk.notifications);
+          let notifications = res.data.users_by_pk.notifications;
+          if (notifications !== undefined) {
+            setNotifications(notifications);
+          }
         });
       }
     });
@@ -88,6 +91,10 @@ export default function AuthTray() {
                   </span>
                   {notifications.map((notification) => (
                     <div key={notification.id}>
+                      <a href={"/profile/" + notification.user_uuid}>
+                        Someone{" "}
+                      </a>
+                      wants to join your project!
                       <div className="card-actions">
                         <button onClick={() => {}}>Accept</button>
                         <button onClick={() => {}}>Reject</button>
@@ -114,6 +121,7 @@ export default function AuthTray() {
               ).then((res) => {
                 if (res.data?.length > 0) {
                   console.log("User doesn't exist; onboarding...");
+                  window.location.href = "/onboarding";
                 } else {
                   console.log("User already exists; logging in...");
                   setUser(getFirebaseUser(context.app));
