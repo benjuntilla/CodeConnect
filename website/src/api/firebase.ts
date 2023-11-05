@@ -1,15 +1,10 @@
-import { FirebaseApp, initializeApp } from "firebase/app";
+import { FirebaseApp, FirebaseOptions, initializeApp } from "firebase/app";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 export function initializeFirebase() {
-  const app = initializeApp({
-    apiKey: "AIzaSyAK9iwn3uVMUIgR8jFwCKar3jaWv6TMQD4",
-    authDomain: "codecupid-8ff03.firebaseapp.com",
-    projectId: "codecupid-8ff03",
-    storageBucket: "codecupid-8ff03.appspot.com",
-    messagingSenderId: "650497263710",
-    appId: "1:650497263710:web:31329fcad44deb16a70ccf",
-  });
+  const app = initializeApp(
+    JSON.parse(process.env.VITE_FIREBASE_CONFIG!) as FirebaseOptions
+  );
 
   return app;
 }
