@@ -30,8 +30,8 @@ export function createNotifcation(
 
 export function getNotifications(client: ApolloClient<any>, user_id: string) {
   const query = gql`
-    query GetNotification {
-      user_by_pk(id: $user_id) {
+    query GetNotification($user_id: String!) {
+      users_by_pk(id: $user_id) {
         notifications {
           id
           project_uuid
@@ -43,6 +43,9 @@ export function getNotifications(client: ApolloClient<any>, user_id: string) {
 
   return client.query({
     query,
+    variables: {
+      user_id,
+    },
   });
 }
 

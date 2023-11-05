@@ -3,7 +3,7 @@ import { Project } from "./types";
 
 export async function createProject(
   client: ApolloClient<any>,
-  project: Project,
+  project: Project
 ) {
   const mutation = gql`
     mutation CreateProject(
@@ -28,6 +28,7 @@ export async function createProject(
         metadata
         skills_required
         created_user
+        project_img
       }
     }
   `;
@@ -77,6 +78,7 @@ export function getProject(client: ApolloClient<any>, id: string) {
         metadata
         skills_required
         created_user
+        project_img
       }
     }
   `;
@@ -115,6 +117,7 @@ export function updateProject(client: ApolloClient<any>, project: Project) {
         metadata
         skills_required
         created_user
+        project_img
       }
     }
   `;
@@ -153,7 +156,7 @@ export function recommendProjects(
   client: ApolloClient<any>,
   user_id: string,
   page_size: number,
-  page_number: number,
+  page_number: number
 ) {
   const query = gql`
     query RecommendProjects(
@@ -174,6 +177,7 @@ export function recommendProjects(
         metadata
         skills_required
         created_user
+        project_img
       }
     }
   `;
@@ -193,7 +197,7 @@ export function searchProjects(
   search: string,
   skills: string,
   page_size: number,
-  page_number: number,
+  page_number: number
 ) {
   const query = gql`
     query SearchProjects(
@@ -216,6 +220,7 @@ export function searchProjects(
         metadata
         skills_required
         created_user
+        project_img
       }
     }
   `;
@@ -236,7 +241,7 @@ export function getProjectsByUser(
   client: ApolloClient<any>,
   user_id: string,
   page_size: number,
-  page_number: number,
+  page_number: number
 ) {
   const query = gql`
     query GetProjectsByUser(
@@ -252,6 +257,7 @@ export function getProjectsByUser(
           metadata
           skills_required
           created_user
+          project_img
         }
       }
     }

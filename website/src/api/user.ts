@@ -28,6 +28,7 @@ export function createUser(client: ApolloClient<any>, user: User) {
         name
         skills
         university
+        profile_pfp
       }
     }
   `;
@@ -58,6 +59,7 @@ export function getUser(client: ApolloClient<any>, id: UUID) {
         name
         skills
         university
+        profile_pfp
       }
     }
   `;
@@ -113,6 +115,7 @@ export function updateUser(client: ApolloClient<any>, user: User) {
         name
         skills
         university
+        profile_pfp
       }
     }
   `;
@@ -158,6 +161,7 @@ export function searchUsers(
         name
         skills
         university
+        profile_pfp
       }
     }
   `;

@@ -10,7 +10,7 @@ export type User = {
 };
 
 export type Project = {
-  id: UUID;
+  id?: UUID;
   name: string;
   description: string;
   skills_required: string;
@@ -19,7 +19,7 @@ export type Project = {
 };
 
 export type Notification = {
-  id: UUID;
+  id?: UUID;
   user_uuid: UUID;
   project_uuid: UUID;
 };
