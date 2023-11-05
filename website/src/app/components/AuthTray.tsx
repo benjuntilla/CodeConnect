@@ -27,6 +27,7 @@ export default function AuthTray() {
   useEffect(() => {
     getAuth(context.app).onAuthStateChanged((user) => {
       if (user) {
+        console.log("Logged in as user UID " + getUserUID(context.app));
         setUser(user);
         getNotifications(
           context.client,
