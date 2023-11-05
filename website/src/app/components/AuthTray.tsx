@@ -18,6 +18,7 @@ import {
   rejectRequest,
 } from "@/lib/api/notification";
 import type { Notification } from "@/lib/types";
+import Link from "next/link";
 
 export default function AuthTray() {
   const context = useUserContext();
@@ -97,9 +98,9 @@ export default function AuthTray() {
               </div>
             </div>
           </div>
-          <a href="/profile">
+          <Link href="/profile">
             <CgProfile className="mx-3" size="2em" />
-          </a>
+          </Link>
         </>
       ) : (
         <button
