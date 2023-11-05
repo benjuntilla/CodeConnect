@@ -12,13 +12,8 @@ import { useState, useEffect } from "react";
 import { useUserContext } from "./UserProvider";
 import { getAuth } from "firebase/auth";
 import { CgProfile } from "react-icons/cg";
-import {
-  getNotifications,
-  acceptRequest,
-  rejectRequest,
-} from "@/lib/api/notification";
+import { getNotifications } from "@/lib/api/notification";
 import type { Notification } from "@/lib/types";
-import Link from "next/link";
 
 export default function AuthTray() {
   const context = useUserContext();
@@ -34,7 +29,7 @@ export default function AuthTray() {
           context.client,
           getUserUID(context.app) ?? "undefined",
         ).then((res) => {
-          let notifications = res.data.users_by_pk.notifications;
+          let notifications = res.data.users_by_pk?.notifications;
           if (notifications !== undefined) {
             setNotifications(notifications);
           }
@@ -114,12 +109,12 @@ export default function AuthTray() {
           className="btn btn-primary"
           onClick={() => {
             loginGoogleFirebase(context.app).then(() => {
-              console.log(getUserUID(context.app) ?? "undefined");
               getUser(
                 context.client,
                 getUserUID(context.app) ?? "undefined",
               ).then((res) => {
-                if (res.data?.length > 0) {
+                console.log(res);
+                if (res.data?.users_by_pk === null) {
                   console.log("User doesn't exist; onboarding...");
                   window.location.href = "/onboarding";
                 } else {
