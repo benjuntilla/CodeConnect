@@ -20,11 +20,14 @@
     "firebase": "^10.5.2",
     "framer": "^2.4.1",
     "graphql": "^16.8.1",
+    "install": "^0.13.0",
     "next": "14.0.1",
+    "npm": "^10.2.3",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^4.11.0",
-    "react-tinder-card": "^1.6.3"
+    "react-tinder-card": "^1.6.3",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.0",
@@ -34,6 +37,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/uuid": "^9.0.6",
     "autoprefixer": "^10.0.1",
     "daisyui": "^3.9.4",
     "eslint": "^8",

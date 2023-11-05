@@ -12,6 +12,7 @@ import { getUser } from "@/lib/api/user";
 import { useState, useEffect } from "react";
 import { useUserContext } from "./UserProvider";
 import { getAuth } from "firebase/auth";
+import { set } from "firebase/database";
 
 export default function LoginButton() {
   const context = useUserContext();
@@ -29,7 +30,7 @@ export default function LoginButton() {
 
   return (
     <>
-      {user?.displayName !== "" ? (
+      {user ? (
         <>
           <p className="mr-3">Logged in as {user?.displayName}</p>
           <button
@@ -47,13 +48,13 @@ export default function LoginButton() {
           className="btn btn-primary"
           onClick={() => {
             loginGoogleFirebase(firebase).then(() => {
+              console.log(getUserUID(context.app) ?? "undefined");
               getUser(
                 apolloClient,
                 getUserUID(context.app) ?? "undefined"
               ).then((res) => {
                 if (res.data?.length > 0) {
                   console.log("User doesn't exist; onboarding...");
-                  window.location.href = "/create_user";
                 } else {
                   console.log("User already exists; logging in...");
                   setUser(getFirebaseUser(context.app));

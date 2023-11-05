@@ -11,17 +11,17 @@ export type User = {
 };
 
 export type Project = {
-  id?: UUID;
+  id?: string;
   name: string;
   description: string;
   skills_required: string;
-  created_user: UUID;
+  created_user: string;
   metadata: Record<string, any>;
   project_img?: string;
 };
 
 export type Notification = {
-  id?: UUID;
-  user_uuid: UUID;
-  project_uuid: UUID;
+  id?: string;
+  user_uuid: string;
+  project_uuid: string;
 };

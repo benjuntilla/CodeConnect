@@ -4,12 +4,11 @@ import TinderCard from "react-tinder-card";
 import Image from "next/image";
 import { ImCross } from "react-icons/im";
 import { AiFillHeart } from "react-icons/ai";
-import { getUserUID, initializeFirebase } from "@/lib/firebase";
 import { recommendProjects } from "@/lib/api/project";
-import { createApolloClient } from "@/lib/apollo";
-import { Project } from "@/lib/types";
+import { Notification, Project } from "@/lib/types";
 import { useUserContext } from "./components/UserProvider";
 import { getAuth } from "firebase/auth";
+import { createNotifcation } from "@/lib/api/notification";
 
 export default function Match() {
   const [lastDirection, setLastDirection] = useState("");
@@ -141,7 +140,14 @@ export default function Match() {
           <button
             className="btn btn-primary"
             disabled={!canSwipe}
-            onClick={() => swipe("right")}
+            onClick={() => {
+              let notification: Notification = {
+                user_uuid: context.user?.uid ?? "undefined",
+                project_uuid: recs[currentIndex].id!,
+              };
+              createNotifcation(context.client, notification);
+              swipe("right");
+            }}
           >
             <AiFillHeart />
           </button>
