@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
+import { FaBeer } from "react-icons/fa";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={inter.className}>
-        <div className="navbar bg-bg">
+        <div className="navbar bg-primary">
           <div className="flex-1">
             <a href="/">
               <Image
@@ -28,7 +29,7 @@ export default function RootLayout({
                 alt="Code Cupid icon"
               />
             </a>
-            <h1 className="text-lg text-primary-content">Code Cupid</h1>
+            <h1 className="text-lg">Code Cupid</h1>
           </div>
           <div className="flex-none">
             <button className="btn btn-primary">Log in</button>
