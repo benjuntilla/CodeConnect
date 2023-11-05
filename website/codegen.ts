@@ -2,10 +2,10 @@ import { CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
   schema: {
-    "https://tough-slug-93.hasura.app/v1/graphql": {
+    "https://quality-oyster-64.hasura.app/v1/graphql": {
       headers: {
         "X-Hasura-Admin-Secret":
-          "f3yn9VCLzFQGEans5uex9J62HdZbArJrlzXlI5WBbmAT6IChIfAvmC3HuRu7R68x",
+          "JKLRAD7Ro8vaY1Yd7TXOAvpq55FRQon5f8FQRkBuhWSE1KVADSbqjgihNfq6SZcd",
       },
     },
   },

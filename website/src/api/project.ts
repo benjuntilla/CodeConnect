@@ -1,10 +1,9 @@
 import { ApolloClient, ApolloQueryResult, gql } from "@apollo/client";
 import { Project } from "./types";
-import { UUID } from "crypto";
 
 export async function createProject(
   client: ApolloClient<any>,
-  project: Project
+  project: Project,
 ) {
   const mutation = gql`
     mutation CreateProject(
@@ -12,7 +11,7 @@ export async function createProject(
       $description: String!
       $skills_required: String = ""
       $metadata: jsonb = ""
-      $created_user: uuid!
+      $created_user: String!
     ) {
       insert_projects_one(
         object: {
@@ -45,7 +44,10 @@ export async function createProject(
   });
 
   const project_mutation = gql`
-    mutation CreateProjectAssignment($user_uuid: uuid!, $project_uuid: uuid!) {
+    mutation CreateProjectAssignment(
+      $user_uuid: String!
+      $project_uuid: uuid!
+    ) {
       insert_project_assignments_one(
         object: { user_uuid: $user_uuid, project_uuid: $project_uuid }
       ) {
@@ -54,7 +56,7 @@ export async function createProject(
       }
     }
   `;
-  data.data.client.mutate({
+  client.mutate({
     mutation: project_mutation,
     variables: {
       user_uuid: project.created_user,
@@ -65,7 +67,7 @@ export async function createProject(
   return data;
 }
 
-export function getProject(client: ApolloClient<any>, id: UUID) {
+export function getProject(client: ApolloClient<any>, id: string) {
   const query = gql`
     query GetProject($id: uuid!) {
       projects_by_pk(id: $id) {
@@ -95,7 +97,7 @@ export function updateProject(client: ApolloClient<any>, project: Project) {
       $description: String!
       $skills_required: String = ""
       $metadata: jsonb = ""
-      $created_user: uuid!
+      $created_user: String!
     ) {
       update_projects_by_pk(
         pk_columns: { id: $id }
@@ -130,7 +132,7 @@ export function updateProject(client: ApolloClient<any>, project: Project) {
   });
 }
 
-export function deleteProject(client: ApolloClient<any>, id: UUID) {
+export function deleteProject(client: ApolloClient<any>, id: string) {
   const mutation = gql`
     mutation DeleteProject($id: uuid!) {
       delete_projects_by_pk(id: $id) {
@@ -149,13 +151,13 @@ export function deleteProject(client: ApolloClient<any>, id: UUID) {
 
 export function recommendProjects(
   client: ApolloClient<any>,
-  user_id: UUID,
+  user_id: string,
   page_size: number,
-  page_number: number
+  page_number: number,
 ) {
   const query = gql`
     query RecommendProjects(
-      $user_id: uuid!
+      $user_id: String!
       $page_size: Int!
       $page_number: Int!
     ) {
@@ -191,7 +193,7 @@ export function searchProjects(
   search: string,
   skills: string,
   page_size: number,
-  page_number: number
+  page_number: number,
 ) {
   const query = gql`
     query SearchProjects(
@@ -232,13 +234,13 @@ export function searchProjects(
 //get projects by user
 export function getProjectsByUser(
   client: ApolloClient<any>,
-  user_id: UUID,
+  user_id: string,
   page_size: number,
-  page_number: number
+  page_number: number,
 ) {
   const query = gql`
     query GetProjectsByUser(
-      $user_id: uuid!
+      $user_id: String!
       $page_size: Int!
       $page_number: Int!
     ) {

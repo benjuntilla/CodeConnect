@@ -6,7 +6,7 @@ export type User = {
   skills: string;
   university: string;
   description: string;
-  metadata: JSON;
+  metadata: Record<string, any>;
 };
 
 export type Project = {
@@ -15,7 +15,7 @@ export type Project = {
   description: string;
   skills_required: string;
   created_user: UUID;
-  metadata: JSON;
+  metadata: Record<string, any>;
 };
 
 export type Notification = {
