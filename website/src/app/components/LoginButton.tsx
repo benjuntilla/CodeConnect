@@ -1,9 +1,8 @@
 "use client";
 
-import { initializeFirebase, loginGoogleFirebase } from "@/api/firebase";
+import { initializeFirebase, loginGoogleFirebase } from "@/lib/firebase";
 
 export default function LoginButton() {
-
   return (
     <button
       className="btn btn-primary"

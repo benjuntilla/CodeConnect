@@ -1,6 +1,6 @@
 "use client";
-import { createApolloClient } from "@/api/apollo";
-import { searchProjects } from "@/api/project";
+import { createApolloClient } from "@/lib/apollo";
+import { searchProjects } from "@/lib/api/project";
 import { useState, useEffect } from "react";
 
 export default function Login() {

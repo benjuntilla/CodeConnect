@@ -1,8 +1,12 @@
 import { Project, User } from "./types";
-import { createUser, searchUsers } from "./user";
+import { createUser, searchUsers } from "./api/user";
 import { createApolloClient } from "./apollo";
-import { createProject, recommendProjects, searchProjects } from "./project";
-import { uploadProfilePfp } from "./image";
+import {
+  createProject,
+  recommendProjects,
+  searchProjects,
+} from "./api/project";
+import { uploadProfilePfp } from "./api/image";
 import { randomUUID } from "crypto";
 import fs from "fs";
 

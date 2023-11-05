@@ -1,6 +1,5 @@
 import { FirebaseApp, FirebaseOptions, initializeApp } from "firebase/app";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import "dotenv/config";
 
 export function initializeFirebase() {
   const app = initializeApp({

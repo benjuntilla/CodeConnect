@@ -1,5 +1,5 @@
 import { ApolloClient, ApolloQueryResult, gql } from "@apollo/client";
-import { User } from "./types";
+import { User } from "../types";
 import { UUID } from "crypto";
 
 export function createUser(client: ApolloClient<any>, user: User) {

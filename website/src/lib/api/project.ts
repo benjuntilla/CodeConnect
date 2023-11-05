@@ -1,5 +1,5 @@
 import { ApolloClient, ApolloQueryResult, gql } from "@apollo/client";
-import { Project } from "./types";
+import { Project } from "../types";
 
 export async function createProject(
   client: ApolloClient<any>,

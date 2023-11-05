@@ -1,5 +1,5 @@
 import { ApolloClient, ApolloQueryResult, gql } from "@apollo/client";
-import { Notification } from "./types";
+import { Notification } from "../types";
 import { UUID } from "crypto";
 import { func } from "prop-types";
 
