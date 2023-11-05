@@ -18,7 +18,7 @@ export default function Profile({ params }: { params: { uid: string } }) {
       if (users === null || users.length === 0) {
         console.log("No users found");
       } else {
-        console.log(users);
+        console.log("Found users");
         setUser(users[0]);
       }
     });
