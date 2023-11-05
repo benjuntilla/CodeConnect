@@ -19,7 +19,7 @@ import {
 } from "@/lib/api/notification";
 import type { Notification } from "@/lib/types";
 
-export default function LoginButton() {
+export default function AuthTray() {
   const context = useUserContext();
   const [user, setUser] = useState(getFirebaseUser(context.app));
   const [notifications, setNotifications] = useState<Notification[]>([]);

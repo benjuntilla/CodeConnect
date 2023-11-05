@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Image from "next/image";
-import LoginButton from "./components/LoginButton";
+import AuthTray from "./components/AuthTray";
 import { UserProvider } from "./components/UserProvider";
-import SearchBar from "./components/SearchBar";
 import React from "react";
 export const useClient = true;
 export const metadata: Metadata = {
@@ -38,7 +37,7 @@ export default function RootLayout({
               <div className="navbar-end"></div> */}
             </div>
             <div className="flex-none">
-              <LoginButton />
+              <AuthTray />
             </div>
           </div>
           <div className="flex justify-center">{children}</div>
