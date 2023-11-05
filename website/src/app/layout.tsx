@@ -4,6 +4,9 @@ import "./globals.css";
 import Image from "next/image";
 import LoginButton from "./components/LoginButton";
 import { CgProfile } from "react-icons/cg";
+import { initializeFirebase } from "@/lib/firebase";
+import { createApolloClient } from "@/lib/apollo";
+import { UserProvider } from "./components/UserProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,6 +20,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const app = initializeFirebase();
+  const client = createApolloClient();
   return (
     <html lang="en" className="dark">
       <body className={inter.className}>
@@ -41,7 +46,9 @@ export default function RootLayout({
             </a>
           </div>
         </div>
-        <div className="flex justify-center">{children}</div>
+        <UserProvider>
+          <div className="flex justify-center">{children}</div>
+        </UserProvider>
       </body>
     </html>
   );

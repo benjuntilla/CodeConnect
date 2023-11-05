@@ -1,56 +1,39 @@
 "use client";
-import React, { useState, useMemo, useRef } from "react";
+import React, { useState, useMemo, useRef, useEffect, useContext } from "react";
 import TinderCard from "react-tinder-card";
 import Image from "next/image";
 import { ImCross } from "react-icons/im";
 import { AiFillHeart } from "react-icons/ai";
-
-interface Project {
-  name: string;
-  url: string;
-  description: string;
-}
-
-const db: Project[] = [
-  {
-    name: "Richard Hendricks",
-    url: "/CodeCupid-.png",
-    description: "blah blah",
-  },
-  {
-    name: "Erlich Bachman",
-    url: "/CodeCupid-.png",
-    description: "blah blah",
-  },
-  {
-    name: "Monica Hall",
-    url: "/CodeCupid-.png",
-    description: "blah blah",
-  },
-  {
-    name: "Jared Dunn",
-    url: "/CodeCupid-.png",
-    description: "blah blah",
-  },
-  {
-    name: "Dinesh Chugtai",
-    url: "/CodeCupid-.png",
-    description: "blah blah",
-  },
-];
+import { getUserUID, initializeFirebase } from "@/lib/firebase";
+import { recommendProjects } from "@/lib/api/project";
+import { createApolloClient } from "@/lib/apollo";
+import { Project } from "@/lib/types";
+import { useUserContext } from "./components/UserProvider";
 
 export default function Match() {
-  const [currentIndex, setCurrentIndex] = useState(db.length - 1);
   const [lastDirection, setLastDirection] = useState("");
   // used for outOfFrame closure
+  const [recs, setRecs] = useState<Project[]>([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const currentIndexRef = useRef(currentIndex);
+  const context = useUserContext();
+
+  useEffect(() => {
+    let user_id = getUserUID();
+    if (user_id != null) {
+      recommendProjects(context.client, user_id, 10, 1).then((data) => {
+        setRecs(data.data);
+        setCurrentIndex(recs.length);
+      });
+    }
+  }, []);
 
   const childRefs = useMemo(
     () =>
-      Array(db.length)
+      Array(recs.length)
         .fill(0)
         .map((i) => React.createRef()),
-    [],
+    [recs.length]
   );
 
   const updateCurrentIndex = (val: number) => {
@@ -58,7 +41,7 @@ export default function Match() {
     currentIndexRef.current = val;
   };
 
-  const canGoBack = currentIndex < db.length - 1;
+  const canGoBack = currentIndex < recs.length - 1;
 
   const canSwipe = currentIndex >= 0;
 
@@ -79,7 +62,7 @@ export default function Match() {
   };
 
   const swipe = async (dir: string) => {
-    if (canSwipe && currentIndex < db.length) {
+    if (canSwipe && currentIndex < recs.length) {
       await (childRefs[currentIndex].current as any).swipe(dir); // Add type assertion here
     }
   };
@@ -119,7 +102,7 @@ export default function Match() {
           </button>
         </div>
         <div className="cardContainer col-span-4 flex justify-center">
-          {db.map((project, index) => (
+          {recs.map((project, index) => (
             <TinderCard
               ref={childRefs[index] as React.RefObject<any>}
               className="absolute"
@@ -130,21 +113,21 @@ export default function Match() {
               <div className="w-96 h-48 bg-base-100 shadow-xl">
                 <figure>
                   <Image
-                    src={project.url}
+                    src={project.project_img ?? "/images/placeholder.png"}
                     width={100}
                     height={100}
                     alt="Project image"
                   />
                 </figure>
                 <div className="card-body">
-                  <h2 className="card-title">
-                    {project.name}
-                    <div className="badge badge-secondary">NEW</div>
-                  </h2>
+                  <h2 className="card-title">{project.name}</h2>
                   <p>{project.description}</p>
                   <div className="card-actions justify-end">
-                    <div className="badge badge-outline">Fashion</div>
-                    <div className="badge badge-outline">Products</div>
+                    {project.skills_required.split(",").map((skill, index) => (
+                      <div className="badge badge-outline" key={index}>
+                        {skill}
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
