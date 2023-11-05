@@ -44,7 +44,7 @@ export default function Profile({ params }: { params: { uid: string } }) {
           <div className="avatar">
             <div className="rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 w-30 h-30">
               <Image
-                src="/Guy.png"
+                src={user?.profile_pfp || "/CodeCupid-.png"}
                 width="150"
                 height="150"
                 alt="Avatar Tailwind CSS Component"
@@ -61,7 +61,7 @@ export default function Profile({ params }: { params: { uid: string } }) {
               color: "white",
             }}
           >
-            User {params.uid}
+            {user ? user.name : "User"}
             <p
               style={{
                 display: "flex",
@@ -77,12 +77,12 @@ export default function Profile({ params }: { params: { uid: string } }) {
 
         <div className="flex flex-col lg:flex-row flex-grow">
           <div className="flex-grow card bg-base-300 rounded-box p-4 m-2">
-            <div className="mb-2">My Projects</div>
+            <div className="mb-2">Projects Owned</div>
             <CreateProj />
           </div>
           <div className="flex-grow card bg-base-300 rounded-box p-4 m-2">
             <div className="mb-2 ">
-              Projects I am Working on
+              Projects Collaborating On
               <div className="overflow-x-auto">
                 <table className="table">
                   {/* head */}
