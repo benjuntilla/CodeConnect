@@ -9,6 +9,7 @@ import { Notification, Project } from "@/lib/types";
 import { useUserContext } from "./components/UserProvider";
 import { getAuth } from "firebase/auth";
 import { createNotifcation } from "@/lib/api/notification";
+import { getFirebaseUser } from "@/lib/firebase";
 
 export default function Match() {
   const [lastDirection, setLastDirection] = useState("");
@@ -142,7 +143,7 @@ export default function Match() {
             disabled={!canSwipe}
             onClick={() => {
               let notification: Notification = {
-                user_uuid: context.user?.uid ?? "undefined",
+                user_uuid: getFirebaseUser(context.app)?.uid ?? "undefined",
                 project_uuid: recs[currentIndex].id!,
               };
               createNotifcation(context.client, notification);
