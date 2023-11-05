@@ -13,8 +13,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n    mutation CreateNotification($user_uuid: String!, $project_uuid: uuid!) {\n      insert_notifications_one(\n        object: { user_uuid: $user_uuid, project_uuid: $project_uuid }\n      ) {\n        id\n        user_uuid\n        project_uuid\n      }\n    }\n  ": types.CreateNotificationDocument,
-    "\n    query GetNotification($user_id: String!) {\n      users_by_pk(id: $user_id) {\n        notifications {\n          id\n          project_uuid\n          user_uuid\n        }\n      }\n    }\n  ": types.GetNotificationDocument,
+    "\n    mutation CreateNotification(\n      $user_uuid: String = \"\"\n      $project_uuid: uuid = \"\"\n    ) {\n      insert_notifications_one(\n        object: { user_uuid: $user_uuid, project_uuid: $project_uuid }\n      ) {\n        id\n        user_uuid\n        project_uuid\n      }\n    }\n  ": types.CreateNotificationDocument,
+    "\n    query GetNotification($user_id: String!) {\n      users_by_pk(id: $user_id) {\n        projects {\n          notifications {\n            id\n            project_uuid\n            user_uuid\n          }\n        }\n      }\n    }\n  ": types.GetNotificationDocument,
     "\n    mutation DeleteNotification($id: uuid!) {\n      delete_notifications_by_pk(id: $id) {\n        id\n      }\n    }\n  ": types.DeleteNotificationDocument,
     "\n    mutation AcceptRequest(\n      $user_id: String!\n      $project_id: uuid!\n      $notification_id: uuid!\n    ) {\n      delete_notifications_by_pk(id: $notification_id) {\n        id\n      }\n      insert_project_assignments_one(\n        object: { user_uuid: $user_id, project_uuid: $project_id }\n      ) {\n        user_uuid\n        project_uuid\n      }\n    }\n  ": types.AcceptRequestDocument,
     "\n    mutation RejectRequest($notification_id: uuid!) {\n      delete_notifications_by_pk(id: $notification_id) {\n        id\n      }\n    }\n  ": types.RejectRequestDocument,
@@ -50,11 +50,11 @@ export function gql(source: string): unknown;
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n    mutation CreateNotification($user_uuid: String!, $project_uuid: uuid!) {\n      insert_notifications_one(\n        object: { user_uuid: $user_uuid, project_uuid: $project_uuid }\n      ) {\n        id\n        user_uuid\n        project_uuid\n      }\n    }\n  "): (typeof documents)["\n    mutation CreateNotification($user_uuid: String!, $project_uuid: uuid!) {\n      insert_notifications_one(\n        object: { user_uuid: $user_uuid, project_uuid: $project_uuid }\n      ) {\n        id\n        user_uuid\n        project_uuid\n      }\n    }\n  "];
+export function gql(source: "\n    mutation CreateNotification(\n      $user_uuid: String = \"\"\n      $project_uuid: uuid = \"\"\n    ) {\n      insert_notifications_one(\n        object: { user_uuid: $user_uuid, project_uuid: $project_uuid }\n      ) {\n        id\n        user_uuid\n        project_uuid\n      }\n    }\n  "): (typeof documents)["\n    mutation CreateNotification(\n      $user_uuid: String = \"\"\n      $project_uuid: uuid = \"\"\n    ) {\n      insert_notifications_one(\n        object: { user_uuid: $user_uuid, project_uuid: $project_uuid }\n      ) {\n        id\n        user_uuid\n        project_uuid\n      }\n    }\n  "];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n    query GetNotification($user_id: String!) {\n      users_by_pk(id: $user_id) {\n        notifications {\n          id\n          project_uuid\n          user_uuid\n        }\n      }\n    }\n  "): (typeof documents)["\n    query GetNotification($user_id: String!) {\n      users_by_pk(id: $user_id) {\n        notifications {\n          id\n          project_uuid\n          user_uuid\n        }\n      }\n    }\n  "];
+export function gql(source: "\n    query GetNotification($user_id: String!) {\n      users_by_pk(id: $user_id) {\n        projects {\n          notifications {\n            id\n            project_uuid\n            user_uuid\n          }\n        }\n      }\n    }\n  "): (typeof documents)["\n    query GetNotification($user_id: String!) {\n      users_by_pk(id: $user_id) {\n        projects {\n          notifications {\n            id\n            project_uuid\n            user_uuid\n          }\n        }\n      }\n    }\n  "];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
