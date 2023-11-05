@@ -1,8 +1,10 @@
-import { randomUUID } from "crypto";
 import { Project, User } from "./types";
 import { createUser, searchUsers } from "./user";
 import { createApolloClient } from "./apollo";
 import { createProject, recommendProjects, searchProjects } from "./project";
+import { uploadProfilePfp } from "./image";
+import { randomUUID } from "crypto";
+import fs from "fs";
 
 const user1 = randomUUID();
 const user2 = randomUUID();
@@ -80,9 +82,32 @@ async function initializeWithDummyData() {
   }
 }
 
-async function reccomendProjectsForUser(user: User) {
+async function recommendProjectsForUser(user: User) {
   let projects = await searchUsers(admin, "John", "", 1, 3);
   console.log(projects.data);
 }
+
+async function searchForProjects() {
+  let projects = await searchProjects(admin, "Website", "", 1, 3);
+  console.log(projects.data);
+}
+
+async function searchForUsers() {
+  let users = await searchUsers(admin, "John", "", 1, 3);
+  console.log(users.data);
+}
+
+async function uploadPfp() {
+  let file = fs.readFileSync(
+    "/Users/denssumesh/Documents/GitHub/CodeCupid/website/src/api/google.txt"
+  );
+  console.log(
+    await uploadProfilePfp("890b5b29-8303-4229-8e01-dbe2f7e20343", file)
+  );
+}
+
 // Promise.resolve(initializeWithDummyData());
-Promise.resolve(reccomendProjectsForUser(users[0]));
+// Promise.resolve(recommendProjectsForUser(users[0]));
+// Promise.resolve(searchForProjects());
+// Promise.resolve(searchForUsers());
+Promise.resolve(uploadPfp());

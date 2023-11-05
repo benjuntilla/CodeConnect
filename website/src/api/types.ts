@@ -7,6 +7,7 @@ export type User = {
   university?: string;
   description?: string;
   metadata?: Record<string, any>;
+  profile_pfp?: string;
 };
 
 export type Project = {
@@ -16,6 +17,7 @@ export type Project = {
   skills_required: string;
   created_user: UUID;
   metadata: Record<string, any>;
+  project_img?: string;
 };
 
 export type Notification = {
