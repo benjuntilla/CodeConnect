@@ -3,9 +3,14 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import "dotenv/config";
 
 export function initializeFirebase() {
-  const app = initializeApp(
-    JSON.parse(process.env.VITE_FIREBASE_CONFIG as string) as FirebaseOptions
-  );
+  const app = initializeApp({
+    apiKey: process.env.VITE_FIREBASE_API_KEY,
+    authDomain: "codecupid-8ff03.firebaseapp.com",
+    projectId: "codecupid-8ff03",
+    storageBucket: "codecupid-8ff03.appspot.com",
+    messagingSenderId: "650497263710",
+    appId: "1:650497263710:web:31329fcad44deb16a70ccf",
+  });
 
   return app;
 }
