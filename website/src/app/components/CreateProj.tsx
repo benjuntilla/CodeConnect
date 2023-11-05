@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { createProject } from "@/lib/api/project";
 import { useUserContext } from "./UserProvider";
 import { getUserUID } from "@/lib/firebase";
+import { getAuth } from "firebase/auth";
+import { doc } from "firebase/firestore";
 
 export default function CreateProj() {
   const context = useUserContext();
@@ -27,7 +29,7 @@ export default function CreateProj() {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    if (!user) {
+    if (!getAuth(context.app).currentUser) {
       setResultText("You must be logged in to create a project.");
       console.error("You must be logged in to create a project.");
       return;
@@ -37,11 +39,13 @@ export default function CreateProj() {
         ...projectData,
         created_user: getUserUID(context.app) || "undefined", // Assuming 'user' object has an 'id' field
       };
+      console.log("newProject", newProject);
       const result = await createProject(context.client, newProject);
       setProjectCreated(true);
       setResultText(
-        `Project "${result.data.insert_projects_one.name}" created successfully!`,
+        `Project "${result.data.insert_projects_one.name}" created successfully!`
       );
+      (document.getElementById("my_modal_3") as HTMLDialogElement)?.close();
     } catch (error) {
       console.error("Error creating project:", error);
     }
@@ -63,13 +67,18 @@ export default function CreateProj() {
 
       <dialog id="my_modal_3" className="modal">
         <div className="modal-box">
-          <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+          <button
+            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            onClick={() =>
+              (
+                document.getElementById("my_modal_3") as HTMLDialogElement
+              )?.close()
+            }
+          >
             ✕
           </button>
           <h3 className="font-bold text-lg">Create your Project!</h3>
-          <p className="py-4">
-            Press ESC key or click the button above to close
-          </p>
+
           <div className="modal-action">
             <form method="dialog">
               {/* if there is a button in form, it will close the modal */}
@@ -134,6 +143,7 @@ export default function CreateProj() {
                     padding: "10px 20px",
                     cursor: "pointer",
                   }}
+                  onClick={handleSubmit}
                 >
                   Create Project
                 </button>
