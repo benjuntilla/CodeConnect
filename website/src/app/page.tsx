@@ -36,7 +36,7 @@ export default function Match() {
       Array(recs.length)
         .fill(0)
         .map((i) => React.createRef()),
-    [recs.length]
+    [recs.length],
   );
 
   const updateCurrentIndex = (val: number) => {
@@ -146,6 +146,7 @@ export default function Match() {
                 user_uuid: getFirebaseUser(context.app)?.uid ?? "undefined",
                 project_uuid: recs[currentIndex].id!,
               };
+              console.log(notification);
               createNotifcation(context.client, notification);
               swipe("right");
             }}
