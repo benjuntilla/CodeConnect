@@ -4,8 +4,10 @@ import { createApolloClient } from "@/lib/apollo";
 import { getUserUID } from "@/lib/firebase";
 import { createUser } from "@/lib/api/user";
 import { useState } from "react";
+import { useUserContext } from "../components/UserProvider";
 
 export default function Onboarding() {
+  const context = useUserContext();
   let [name, setName] = useState("");
   let [description, setDescription] = useState("");
   let [skills, setSkills] = useState("");
@@ -98,7 +100,8 @@ export default function Onboarding() {
       <button
         className="btn btn-primary"
         onClick={() => {
-          let uid = getUserUID();
+          let uid = getUserUID(context.app);
+          console.log(uid);
           if (uid === null) throw new Error("User not logged in");
           let client = createApolloClient();
           createUser(client, {
@@ -110,7 +113,7 @@ export default function Onboarding() {
             university: university,
             profile_pfp: "test",
           });
-          window.location.href = "/";
+          // window.location.href = "/";
         }}
       >
         Create account
