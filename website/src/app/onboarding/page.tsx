@@ -1,10 +1,10 @@
 "use client";
 
-import { createApolloClient } from "@/lib/apollo";
 import { getUserUID } from "@/lib/firebase";
-import { createUser } from "@/lib/api/user";
+import { updateUser, createUser, getUser } from "@/lib/api/user";
 import { useState } from "react";
 import { useUserContext } from "../components/UserProvider";
+import type { User } from "@/lib/types";
 
 export default function Onboarding() {
   const context = useUserContext();
@@ -13,6 +13,14 @@ export default function Onboarding() {
   let [skills, setSkills] = useState("");
   let [githubURL, setGithubURL] = useState("");
   let [university, setUniversity] = useState("");
+
+  async function UserExists() {
+    const res = await getUser(
+      context.client,
+      getUserUID(context.app) || "undefined",
+    );
+    return res.data.users_by_pk !== null;
+  }
 
   return (
     <div className="flex flex-col">
@@ -90,7 +98,9 @@ export default function Onboarding() {
         <div className="profile_pfp"></div>
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text">Profile picture upload (optional)</span>
+            <span className="label-text">
+              Profile picture upload (optional)
+            </span>
           </label>
           <input
             type="file"
@@ -102,10 +112,8 @@ export default function Onboarding() {
         className="btn btn-primary"
         onClick={() => {
           let uid = getUserUID(context.app);
-          console.log(uid);
           if (uid === null) throw new Error("User not logged in");
-          let client = createApolloClient();
-          createUser(client, {
+          let user: User = {
             name: name,
             id: uid,
             description: description,
@@ -113,8 +121,16 @@ export default function Onboarding() {
             metadata: { github_url: githubURL },
             university: university,
             profile_pfp: "test",
+          };
+          UserExists().then((res) => {
+            if (res) {
+              console.log("Updating user...");
+              updateUser(context.client, user);
+            } else {
+              console.log("Creating user...");
+              createUser(context.client, user);
+            }
           });
-          // window.location.href = "/";
         }}
       >
         Create account
