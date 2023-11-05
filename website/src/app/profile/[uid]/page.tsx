@@ -67,7 +67,7 @@ export default function Profile({ params }: { params: { uid: string } }) {
                 </div>
               ))}
             </div>
-            {user?.university}
+            {/* {user?.university} */}
             <p className="flex items-center">
               <AiFillGithub className="mx-3" />
               <a href={user?.metadata?.github_link || "#"}>GitHub</a>
