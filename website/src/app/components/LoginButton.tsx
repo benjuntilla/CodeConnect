@@ -38,6 +38,7 @@ export default function LoginButton() {
             onClick={() => {
               console.log("Logging out...");
               logoutFirebase(context.app);
+              window.location.reload();
             }}
           >
             Log out
