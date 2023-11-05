@@ -98,9 +98,9 @@ export default function AuthTray() {
               </div>
             </div>
           </div>
-          <Link href="/profile">
+          <a href={"/profile/" + getUserUID(context.app)}>
             <CgProfile className="mx-3" size="2em" />
-          </Link>
+          </a>
         </>
       ) : (
         <button
