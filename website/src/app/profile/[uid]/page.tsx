@@ -52,7 +52,7 @@ export default function Profile({ params }: { params: { uid: string } }) {
             </div>
           </div>
           <div
-            className="place-content-evenly px-10"
+            className="place-content-evenly px-10 flex flex-column justify-center ml-1"
             style={{
               display: "flex",
               flexDirection: "column",
@@ -62,16 +62,17 @@ export default function Profile({ params }: { params: { uid: string } }) {
             }}
           >
             {user ? user.name : "User"}
-            <p
-              style={{
-                display: "flex",
-                alignItems: "center",
-                fontSize: "14px",
-              }}
-            >
+            <p className="flex items-center">
               <AiFillGithub className="mx-3" size="2em" />
-              <a href="#">Your Link</a>
+              <a href={user?.metadata?.github_link || "#"}>GitHub</a>
             </p>
+            {user?.university}
+            {user?.skills.split(",").map((skill, index) => (
+              <div className="badge badge-outline" key={index}>
+                {skill}
+              </div>
+            ))}
+            <p>{user?.description || "No description"}</p>
           </div>
         </div>
 
