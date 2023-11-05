@@ -1,7 +1,5 @@
 import { ApolloClient, ApolloQueryResult, gql } from "@apollo/client";
 import { Notification } from "../types";
-import { UUID } from "crypto";
-import { func } from "prop-types";
 
 export function createNotifcation(
   client: ApolloClient<any>,
@@ -52,7 +50,7 @@ export function getNotifications(client: ApolloClient<any>, user_id: string) {
   });
 }
 
-export function deleteNotification(client: ApolloClient<any>, id: UUID) {
+export function deleteNotification(client: ApolloClient<any>, id: string) {
   const mutation = gql`
     mutation DeleteNotification($id: uuid!) {
       delete_notifications_by_pk(id: $id) {
@@ -71,9 +69,9 @@ export function deleteNotification(client: ApolloClient<any>, id: UUID) {
 
 export function acceptRequest(
   client: ApolloClient<any>,
-  user_id: UUID,
-  project_id: UUID,
-  notification_id: UUID
+  user_id: string,
+  project_id: string,
+  notification_id: string
 ) {
   const mutation = gql`
     mutation AcceptRequest(
@@ -104,7 +102,7 @@ export function acceptRequest(
 
 export function rejectRequest(
   client: ApolloClient<any>,
-  notification_id: UUID
+  notification_id: string
 ) {
   const mutation = gql`
     mutation RejectRequest($notification_id: uuid!) {

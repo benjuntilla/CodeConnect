@@ -22,6 +22,7 @@ export default function Match() {
   useEffect(() => {
     getAuth(context.app).onAuthStateChanged((user) => {
       if (user) {
+        context.setUser(user);
         recommendProjects(context.client, user?.uid, 10, 1).then((data) => {
           console.log(data);
           setRecs(data.data.recommend_projects);

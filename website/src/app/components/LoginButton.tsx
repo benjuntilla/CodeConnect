@@ -24,6 +24,7 @@ export default function LoginButton() {
     getAuth(context.app).onAuthStateChanged((user) => {
       if (user) {
         setUser(user);
+        context.setUser(user);
       }
     });
   }, []);
