@@ -80,7 +80,7 @@ export default function Match() {
 
   return (
     <div className="h-full w-full">
-      <button
+      {/* <button
         className="btn btn-primary"
         disabled={!canGoBack}
         onClick={() => goBack()}
@@ -93,18 +93,18 @@ export default function Match() {
         <h2>
           Swipe a card or press a button to get Restore Card button visible!
         </h2>
-      )}
-      <div className="grid grid-cols-6">
-        <div className="col-span-1 flex justify-center items-center">
+      )} */}
+      <div className="flex flex-row h-screen w-full p-16">
+        <div className="h-full basis-1/5 flex justify-center items-center">
           <button
-            className="btn btn-primary"
+            className="btn btn-primary w-full h-full"
             disabled={!canSwipe}
             onClick={() => swipe("left")}
           >
-            <ImCross />
+            <ImCross size="6rem" />
           </button>
         </div>
-        <div className="cardContainer col-span-4 flex justify-center">
+        <div className="cardContainer basis-3/5 flex justify-center">
           {recs.map((project, index) => (
             <TinderCard
               ref={childRefs[index] as React.RefObject<any>}
@@ -113,12 +113,12 @@ export default function Match() {
               onSwipe={(dir) => swiped(dir, project.name, index)}
               onCardLeftScreen={() => outOfFrame(project.name, index)}
             >
-              <div className="w-96 h-48 bg-base-100 shadow-xl">
+              <div className="card bg-base-100 shadow-xl">
                 <figure>
                   <Image
-                    src={project.project_img ?? "/images/placeholder.png"}
-                    width={100}
-                    height={100}
+                    src={project.project_img ?? "/CodeCupid-.png"}
+                    width={400}
+                    height={400}
                     alt="Project image"
                   />
                 </figure>
@@ -137,9 +137,9 @@ export default function Match() {
             </TinderCard>
           ))}
         </div>
-        <div className="col-span-1 justify-center items-center">
+        <div className="h-full basis-1/5 flex justify-center items-center">
           <button
-            className="btn btn-primary"
+            className="btn btn-primary h-full w-full"
             disabled={!canSwipe}
             onClick={() => {
               let notification: Notification = {
@@ -151,7 +151,7 @@ export default function Match() {
               swipe("right");
             }}
           >
-            <AiFillHeart />
+            <AiFillHeart size="6rem" />
           </button>
         </div>
       </div>
