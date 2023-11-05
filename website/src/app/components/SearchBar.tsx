@@ -37,7 +37,7 @@ export default function SearchBar() {
           setSearchTerm(e.target.value);
         }}
       />
-      <button onClick={handleSearchClick}>Search</button>
+      <button onClick={handleSearchClick}></button>
     </div>
   );
 }
