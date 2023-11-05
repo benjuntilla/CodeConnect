@@ -49,7 +49,7 @@ export function createUser(client: ApolloClient<any>, user: User) {
   }
 }
 
-export function getUser(client: ApolloClient<any>, id: UUID) {
+export function getUser(client: ApolloClient<any>, id: string) {
   const query = gql`
     query GetUser($id: String!) {
       users_by_pk(id: $id) {
@@ -72,7 +72,7 @@ export function getUser(client: ApolloClient<any>, id: UUID) {
   });
 }
 
-export function deleteUser(client: ApolloClient<any>, id: UUID) {
+export function deleteUser(client: ApolloClient<any>, id: string) {
   const mutation = gql`
     mutation DeleteUser($id: String!) {
       delete_users_by_pk(id: $id) {
@@ -138,7 +138,7 @@ export function searchUsers(
   name: string,
   skills: string,
   page_num: number,
-  page_size: number,
+  page_size: number
 ) {
   const query = gql`
     query SearchUsers(
