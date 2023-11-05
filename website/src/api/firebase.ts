@@ -41,7 +41,7 @@ export function loginGoogleFirebase(app: FirebaseApp) {
   return user;
 }
 
-export function logoutFirebase(app: FirebaseApp) {
+export function logoutFirebase() {
   const auth = getAuth();
   auth
     .signOut()
@@ -53,7 +53,7 @@ export function logoutFirebase(app: FirebaseApp) {
     });
 }
 
-export function getFirebaseUser(app: FirebaseApp) {
+export function getFirebaseUser() {
   const auth = getAuth();
   const user = auth.currentUser;
 
@@ -64,7 +64,7 @@ export function getFirebaseUser(app: FirebaseApp) {
   }
 }
 
-export function getUserUID(app: FirebaseApp) {
+export function getUserUID() {
   const auth = getAuth();
   const user = auth.currentUser;
 
