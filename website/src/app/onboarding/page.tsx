@@ -1,7 +1,7 @@
 "use client";
 
-import { getUserUID } from "@/lib/firebase";
-import { updateUser, createUser, getUser } from "@/lib/api/user";
+import { logoutFirebase, getUserUID } from "@/lib/firebase";
+import { updateUser, createUser, getUser, deleteUser } from "@/lib/api/user";
 import { useState } from "react";
 import { useUserContext } from "../components/UserProvider";
 import type { User } from "@/lib/types";
@@ -129,11 +129,24 @@ export default function Onboarding() {
             } else {
               console.log("Creating user...");
               createUser(context.client, user);
+              window.location.href = "/profile/" + getUserUID(context.app);
             }
           });
         }}
       >
         Create account
+      </button>
+      <button
+        className="btn btn-primary"
+        onClick={() => {
+          console.log("Deleting user...");
+          deleteUser(context.client, getUserUID(context.app) || "undefined");
+          console.log("Logging out...");
+          logoutFirebase(context.app);
+          window.location.reload();
+        }}
+      >
+        Delete account
       </button>
     </div>
   );
