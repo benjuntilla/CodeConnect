@@ -31,7 +31,7 @@ export default function RootLayout({
                 />
               </a>
               <a href="/">
-                <h1>Code Cupid</h1>
+                <p className="text-2xl">Code Cupid</p>
               </a>
               {/* <div className="navbar-start"></div>
               <SearchBar />
