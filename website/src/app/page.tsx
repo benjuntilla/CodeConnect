@@ -46,7 +46,7 @@ export default function Match() {
 
   const canGoBack = currentIndex < recs.length - 1;
 
-  const canSwipe = currentIndex >= 0;
+  const canSwipe = currentIndex >= 0 && recs.length !== 0;
 
   // set last direction and decrease current index
   const swiped = (direction: string, nameToDelete: string, index: number) => {
@@ -79,7 +79,7 @@ export default function Match() {
   };
 
   return (
-    <div className="h-full w-full">
+    <div className="flex-1 h-full w-full">
       {/* <button
         className="btn btn-primary"
         disabled={!canGoBack}
@@ -94,7 +94,7 @@ export default function Match() {
           Swipe a card or press a button to get Restore Card button visible!
         </h2>
       )} */}
-      <div className="flex flex-row h-screen w-full p-16">
+      <div className="flex flex-row h-[85vh] w-full p-16">
         <div className="h-full basis-1/5 flex justify-center items-center">
           <button
             className="btn btn-primary w-full h-full"
