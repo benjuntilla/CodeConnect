@@ -19,15 +19,15 @@ export default function Profile({ params }: { params: { uid: string } }) {
         console.log("No users found");
       } else {
         console.log("Found users");
-        setUser(users[0]);
+        setUser(users);
       }
     });
-  }, [context.client, params.uid]);
+  });
 
   return (
     <>
       <div
-        className="text-2xl grid grid-rows-1 w-full h-full"
+        className="grid grid-rows-1 w-full h-full"
         style={{
           display: "flex",
           flexDirection: "column",
@@ -35,6 +35,7 @@ export default function Profile({ params }: { params: { uid: string } }) {
         }}
       >
         <div
+          className="ml-10 mt-10"
           style={{
             display: "flex",
             justifyContent: "flex-start",
@@ -45,33 +46,32 @@ export default function Profile({ params }: { params: { uid: string } }) {
             <div className="rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 w-30 h-30">
               <Image
                 src={user?.profile_pfp || "/CodeCupid-.png"}
-                width="150"
-                height="150"
+                width="125"
+                height="125"
                 alt="Avatar Tailwind CSS Component"
               />
             </div>
           </div>
           <div
-            className="place-content-evenly px-10 flex flex-column justify-center ml-1"
+            className="px-10 justify-center ml-1"
             style={{
               display: "flex",
               flexDirection: "column",
-              justifyContent: "center",
-              marginLeft: "1rem",
-              color: "white",
             }}
           >
-            {user ? user.name : "User"}
+            <p className="text-2xl">{user ? user.name : "User"}</p>
+            <div className="flex flex-column">
+              {user?.skills.split(",").map((skill, index) => (
+                <div className="badge badge-outline" key={index}>
+                  {skill}
+                </div>
+              ))}
+            </div>
+            {user?.university}
             <p className="flex items-center">
-              <AiFillGithub className="mx-3" size="2em" />
+              <AiFillGithub className="mx-3" />
               <a href={user?.metadata?.github_link || "#"}>GitHub</a>
             </p>
-            {user?.university}
-            {user?.skills.split(",").map((skill, index) => (
-              <div className="badge badge-outline" key={index}>
-                {skill}
-              </div>
-            ))}
             <p>{user?.description || "No description"}</p>
           </div>
         </div>
