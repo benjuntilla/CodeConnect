@@ -4,9 +4,9 @@ export type User = {
   id: UUID;
   name: string;
   skills: string;
-  university: string;
-  description: string;
-  metadata: Record<string, any>;
+  university?: string;
+  description?: string;
+  metadata?: Record<string, any>;
 };
 
 export type Project = {
