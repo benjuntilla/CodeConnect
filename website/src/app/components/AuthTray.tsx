@@ -36,7 +36,7 @@ export default function AuthTray() {
         });
       }
     });
-  }, []);
+  }, [context.app, context.client]);
 
   return (
     <>
@@ -85,14 +85,12 @@ export default function AuthTray() {
                     {notifications.length} Notifications
                   </span>
                   {notifications.map((notification) => (
-                    <>
-                      <div key={notification.id}>
-                        <div className="card-actions">
-                          <button onClick={() => {}}>Accept</button>
-                          <button onClick={() => {}}>Reject</button>
-                        </div>
+                    <div key={notification.id}>
+                      <div className="card-actions">
+                        <button onClick={() => {}}>Accept</button>
+                        <button onClick={() => {}}>Reject</button>
                       </div>
-                    </>
+                    </div>
                   ))}
                 </div>
               </div>
