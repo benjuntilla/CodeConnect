@@ -1,8 +1,29 @@
-import { AiFillGithub } from "react-icons/ai";
-import CreateProj from "../components/CreateProj";
-import Image from "next/image";
+"use client";
 
-export default function Profile() {
+import { AiFillGithub } from "react-icons/ai";
+import CreateProj from "../../components/CreateProj";
+import Image from "next/image";
+import { useUserContext } from "../../components/UserProvider";
+import { useState, useEffect } from "react";
+import { getUser } from "@/lib/api/user";
+import type { User } from "@/lib/types";
+
+export default function Profile({ params }: { params: { uid: string } }) {
+  const context = useUserContext();
+  const [user, setUser] = useState<User>();
+
+  useEffect(() => {
+    getUser(context.client, params.uid).then((res) => {
+      let users = res.data.users_by_pk;
+      if (users === null || users.length === 0) {
+        console.log("No users found");
+      } else {
+        console.log(users);
+        setUser(users[0]);
+      }
+    });
+  }, [context.client, params.uid]);
+
   return (
     <>
       <div
@@ -40,7 +61,7 @@ export default function Profile() {
               color: "white",
             }}
           >
-            John Doe
+            User {params.uid}
             <p
               style={{
                 display: "flex",
@@ -228,7 +249,7 @@ export default function Profile() {
                         </div>
                       </td>
                       <td>
-                        <a className="link link-warning">
+                        <a className="link link-success">
                           https://github.com/CreativeSoul/personal-website-portfolio
                         </a>
                         <br />
