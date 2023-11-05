@@ -13,6 +13,7 @@ export default function Profile({ params }: { params: { uid: string } }) {
   const [user, setUser] = useState<User>();
 
   useEffect(() => {
+    console.log(params.uid);
     getUser(context.client, params.uid).then((res) => {
       let users = res.data.users_by_pk;
       if (users === null || users.length === 0) {
